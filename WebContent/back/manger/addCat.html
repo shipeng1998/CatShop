@@ -1,0 +1,96 @@
+<style type="text/css">
+#addCat,#addCat ul{
+margin: 0 auto;
+width: 400px;
+}
+#addCat ul li{
+width: 380px;
+margin-top: 10px;
+}
+#addCat ul li:FIRST-CHILD {
+	margin-top: 40px;
+}
+#addCat ul li label{
+display: inline-block;
+width: 100px;
+text-decoration: right;
+
+}
+</style>
+
+<form id="addCat" method="post" enctype="multipart/form-data">
+<ul>
+   <li><label>猫咪名称：</label>
+    <input class="easyui-validatebox" name="cname" data-options="required:true">
+   </li>
+   <li><label>猫咪种类：</label>
+    <input class="easyui-validatebox" name="ctype" data-options="required:true">
+   </li>
+   <li><label>成本价格：</label>
+    <input class="easyui-validatebox" name="realprice" data-options="required:true">
+   </li>
+   <li><label>市场价格：</label>
+    <input class="easyui-validatebox" name="cprice" data-options="required:true">
+   </li>
+   <li><label>猫咪图片：</label>
+    <input type="file" name="cphoto" data-options="required:true">
+   </li>
+   <li><label>猫咪性别：</label>
+    <input class="easyui-validatebox" name="csex" >
+   </li>
+   <li><label>猫咪外形描述：</label>
+    <input class="easyui-validatebox" name="cappearance" >
+   </li>
+   <li><label>猫咪年龄：</label>
+    <input class="easyui-validatebox" name="cage" >
+   </li>
+   <li><label></label>
+       
+       <a class="easyui-linkbutton add_cat" style="width: 100px;" >添加</a>
+   </li>
+
+
+</ul>
+
+
+</form>
+<script type="text/javascript">
+$(function(){
+	$('#addCat .add_cat').click(function(){
+		//表单提交
+		$('#addCat').form('submit', {
+		    url:'../../CatFile.action',
+		    onSubmit: function(){
+		        // do some check
+		        // return false to prevent submit;
+		    },
+		    success:function(data){
+		        if(data==1){
+		        	$.messager.show({
+		        		title:'温馨提示',
+		        		msg:'猫信息添加成功',
+		        		timeout:5000,
+		        		showType:'slide'
+		        	});
+		        }else{
+		        	$.messager.alert('错误警告','添加失败');
+		        }
+		    }
+		});
+	});
+	
+	
+	
+});
+
+
+
+
+</script>
+
+
+
+
+
+
+

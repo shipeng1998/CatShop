@@ -1,0 +1,87 @@
+<style type="text/css">
+#addShopping,#addShopping ul{
+margin: 0 auto;
+width: 400px;
+}
+#addShopping ul li{
+width: 380px;
+margin-top: 10px;
+}
+#addShopping ul li:FIRST-CHILD {
+	margin-top: 40px;
+}
+#addShopping ul li label{
+display: inline-block;
+width: 100px;
+text-decoration: right;
+
+}
+</style>
+
+<form id="addShopping" method="post" enctype="multipart/form-data">
+<ul>
+   <li><label>名称：</label>
+    <input class="easyui-validatebox" name="spname" data-options="required:true">
+   </li>
+   <li><label>成本价格：</label>
+    <input class="easyui-validatebox" name="realprice" data-options="required:true">
+   </li>
+   <li><label>市场价格：</label>
+    <input class="easyui-validatebox" name="spprice" data-options="required:true">
+   </li>
+   <li><label>图片：</label>
+    <input type="file" name="spphoto" data-options="required:true">
+   </li>
+   <li><label>库存：</label>
+    <input class="easyui-validatebox" name="spnum" data-options="required:true">
+   </li>
+   <li><label></label>
+       
+       <a class="easyui-linkbutton add_shopping" style="width: 100px;" >添加</a>
+   </li>
+
+
+</ul>
+
+
+</form>
+<script type="text/javascript">
+$(function(){
+	$('#addShopping .add_shopping').click(function(){
+		//表单提交
+		$('#addShopping').form('submit', {
+		    url:'../../ShoppingFile.action',
+		    onSubmit: function(){
+		        // do some check
+		        // return false to prevent submit;
+		    },
+		    success:function(data){
+		        if(data==1){
+		        	$.messager.show({
+		        		title:'温馨提示',
+		        		msg:'宠物用品信息添加成功',
+		        		timeout:5000,
+		        		showType:'slide'
+		        	});
+		        }else{
+		        	$.messager.alert('错误警告','添加失败');
+		        }
+		    }
+		});
+	});
+	
+	
+	
+});
+
+
+
+
+</script>
+
+
+
+
+
+
+

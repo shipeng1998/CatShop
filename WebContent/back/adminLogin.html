@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>后台登录</title>
+    <!-- for-mobile-apps -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+    <!-- //for-mobile-apps -->
+    <link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+
+</head>
+<body>
+    <!-- main -->
+    <div class="main">
+        <h1>
+            后台登录系统
+        </h1>
+        <form action="javascript:login()">
+            <input type="text" name="raname" value="用户名" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = '用户名';}"
+                   required="">
+            <input type="password" name="rapwd" value="Password" onFocus="this.value = '';" onBlur="if (this.value == '') {this.value = '';}"
+                   required="">
+            <input type="submit" value="登录" >
+        </form>
+    </div>
+    <div class="footer">
+        <p>
+            &copy 衡阳市源辰信息科技有限公司<a href="http://www.hnycinfo.com" target="_blank">源辰信息</a>
+        </p>
+    </div>
+  <script type="text/javascript" src="js/jquery.min.js"></script>
+  <script type="text/javascript">
+  function login(){
+	  //获取用户名和密码
+	  var name=$('input[name="raname"]').val();
+	  var pwd=$('input[name="rapwd"]').val();
+	  //admin.action 页面是在back
+	  $.post("../admin.action",{op:'login',aname:name,apwd:pwd},function(data){
+		  if(data==1){
+			  //登录成功
+			  window.location.href='manger/index.jsp';
+		  }
+		  
+	  });
+  }
+  
+  
+  
+  
+  </script>
+</body>
+</html>

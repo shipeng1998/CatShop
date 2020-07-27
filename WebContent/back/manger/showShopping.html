@@ -1,0 +1,54 @@
+<div class="search_Shopping">
+   <label>猫用品名称：</label><input name="spname" class="easyui-validatebox">
+   <a class="easyui-linkbutton" href="javascript:findShopping()">查询</a>
+</div>
+<table id="show_shopping"></table>
+<script type="text/javascript">
+//加载表格
+$('#show_shopping').datagrid({
+	 url:'../../Shopping.action?op=backfindPage',
+      pagination:true,//分页的工具栏
+      pageList:[3,6,9],
+      pageSize:6,
+	    columns:[[
+	        {field:'spid',title:'猫用品编号',width:120},
+	        {field:'spname',title:'猫用品名称',width:120},
+	        {field:'realprice',title:'成本价格',width:120},
+	        {field:'spprice',title:'销售价格',width:120},
+	        {field:'spnum',title:'库存',width:120},
+	        {field:'spphoto',title:'图片',width:120,
+	        	formatter: function(value,row,index){
+					if (undefined==value){
+						return '未上传图片';
+					} else {
+						return '<img src="../../'+value+'" width="120" heigth="120"/>';
+					}
+				}},
+			{field:'aa',title:'操作',width:120,
+				formatter: function(value,row,index){
+					return '<a href="javascript:updateFood('+row.spid+')">修改</a>';
+				}}	
+	      ]],
+	      toolbar:[{
+	    	 iconCls:'icon-edit',
+	    	 handler:function(){alert('edit')}
+	      },{
+	    	     iconCls:'icon-help',
+		    	 handler:function(){alert('帮助')}
+	      }]
+	   
+});
+
+//根据条件查看
+function findShopping(){
+	//获取名称
+	var fname=$('.search_cat input[name="spname"]').val();
+	$('#show_cat').datagrid('load',{
+		spname:spname
+	});
+}
+//修改
+function updateCat(icd){
+	alert(fid);
+}
+</script>

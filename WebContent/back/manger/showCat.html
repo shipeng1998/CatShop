@@ -1,0 +1,56 @@
+<div class="search_cat">
+   <label>猫咪种类：</label><input name="ctype" class="easyui-validatebox">
+   <a class="easyui-linkbutton" href="javascript:findCat()">查询</a>
+</div>
+<table id="show_cat"></table>
+<script type="text/javascript">
+//加载表格
+$('#show_cat').datagrid({
+	 url:'../../CatShop.action?op=backfindPage',
+      pagination:true,//分页的工具栏
+      pageList:[3,6,9],
+      pageSize:6,
+	    columns:[[
+	        {field:'cid',title:'猫咪编号',width:120},
+	        {field:'cname',title:'猫咪名称',width:120},
+	        {field:'realprice',title:'成本价格',width:120},
+	        {field:'cprice',title:'销售价格',width:120},
+	        {field:'csex',title:'公/母',width:120},
+	        {field:'cappearance',title:'外形描述',width:120},
+	        {field:'cage',title:'年龄',width:120},
+	        {field:'cphoto',title:'图片',width:120,
+	        	formatter: function(value,row,index){
+					if (undefined==value){
+						return '未上传图片';
+					} else {
+						return '<img src="../../'+value+'" width="120" heigth="120"/>';
+					}
+				}},
+			{field:'aa',title:'操作',width:120,
+				formatter: function(value,row,index){
+					return '<a href="javascript:updateFood('+row.cid+')">修改</a>';
+				}}	
+	      ]],
+	      toolbar:[{
+	    	 iconCls:'icon-edit',
+	    	 handler:function(){alert('edit')}
+	      },{
+	    	     iconCls:'icon-help',
+		    	 handler:function(){alert('帮助')}
+	      }]
+	   
+});
+
+//根据条件查看
+function findCat(){
+	//获取名称
+	var fname=$('.search_cat input[name="ctype"]').val();
+	$('#show_cat').datagrid('load',{
+		ctype:ctype
+	});
+}
+//修改
+function updateCat(icd){
+	alert(fid);
+}
+</script>

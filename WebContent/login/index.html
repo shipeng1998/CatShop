@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>欢迎光临猫咪之家</title>
+
+<link rel="stylesheet" href="css/font-awesome-4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="css/style.css">
+
+</head>
+<body>
+
+<div class="materialContainer">
+	<div class="box">
+		<div class="title">登录</div>
+		<div class="input">
+			<label for="name">用户名</label>
+			<input type="text" name="name" id="name">
+			<span class="spin"></span>
+		</div>
+		<div class="input">
+			<label for="pass">密码</label>
+			<input type="password" name="pass" id="pass">
+			<span class="spin"></span>
+		</div>
+		<div class="button login">
+			<button>
+				<span>登录</span>
+				<i class="fa fa-check"></i>
+			</button>
+		</div>
+		<a href="javascript:" class="pass-forgot">忘记密码？</a>
+	</div>
+
+	<div class="overbox">
+		<div class="material-button alt-2">
+			<span class="shape"></span>
+		</div>
+		<div class="title">注册</div>
+		<div class="input">
+			<label for="regname">用户名</label>
+			<input type="text" name="regname" id="regname">
+			<span class="spin"></span>
+		</div>
+		<div class="input">
+			<label for="regpass">密码</label>
+			<input type="password" name="regpass" id="regpass">
+			<span class="spin"></span>
+		</div>
+		<div class="input">
+			<label for="reregpass">确认密码</label>
+			<input type="password" name="reregpass" id="reregpass">
+			<span class="spin"></span>
+		</div>
+		<div class="button">
+			<button>
+				<span>注册</span>
+			</button>
+		</div>
+	</div>
+
+</div>
+
+<script src="js/jquery.min.js"></script>
+<script src="js/index.js"></script>
+<script type="text/javascript">
+
+$('.overbox .input input[name="regname"').blur(function(){
+	var value=$(this).val();
+	//查询是否已注册 发送ajax请求
+	$.get("../user.action",{op:'checkName',uname:value},function(data){
+		console.log(data);
+		if(2==data.trim()){
+			alert('用户名已注册');
+		}
+	});
+});
+
+$('.overbox .button button').click(function(){
+	var regpass=$('.overbox .input input[name="regpass"]').val();
+	var reregpass=$('.overbox .input input[name="reregpass"]').val();
+	var regname=$('.overbox .input input[name="regname"]').val();
+	if(regpass!=reregpass){
+		alert("请输入相同密码！！");
+		return;
+	}
+	$.post('../user.action',{op:'register',uname:regname,upwd:regpass},function(data){
+		if(1==data){
+	    	alert('注册成功，请登录！');
+	    	window.location.href="index.html";
+	    }
+	});
+	
+});
+
+
+$('.box button').click(function(){
+	var name=$('.box .input input[name="name"]').val();
+	var pwd=$('.box .input input[name="pass"]').val();
+      $.post('../user.action',{op:'login',uname:name,upwd:pwd},function(data){
+		if(data==1){
+			window.location.href="../index.jsp";
+		}
+	});
+});
+
+
+
+</script>
+</body>
+</html>
